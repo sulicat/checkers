@@ -131,8 +131,7 @@
      English draughts board with all pieces on starting position @endverbatim
  *
  */
-int main(void)
-{
+int main(int argc, char **argv){
 	try
 	{
 		checkers::signal(SIGINT,  SIG_IGN);
@@ -144,7 +143,18 @@ int main(void)
 		checkers::signal(SIGSEGV, &checkers::crash_handler);
 		checkers::signal(SIGTRAP, &checkers::crash_handler);
 
-		checkers::engine::init().run();
+
+		if( argc != 2 ){std::cout << "wrong args\n"; return 0;}
+		std::string s( argv[1] );
+		std::cout << s << "\n";
+
+		std::string command = "setboard " + s;
+		std::cout << command << "\n";
+		checkers::engine::init().run_command(command);
+		checkers::engine::init().run_command("go");
+
+
+
 	}
 	catch (std::exception& e)
 	{
