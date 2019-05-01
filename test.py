@@ -15,16 +15,14 @@ board = [ [0, 3, 0, 3, 0, 0, 0, 0],
           [3, 0, 3, 0, 3, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0],
-          [0, 0, 0, 0, 0, 0, 0, 0],
+          [0, 0, 0, 0, 0, 4, 0, 0],
           [0, 0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 4, 0, 0, 0, 0],
           [1, 0, 2, 0, 1, 0, 0, 0] ]
 
 FEN = {
     "B":[],
-    "W":[],
-    "BK":[],
-    "BW":[]
+    "W":[]
 }
 
 FEN_str = ""
@@ -61,11 +59,17 @@ if len(FEN["W"]) > 0:
             FEN_str += ","
 
 
-print( FEN_str )
+#print( "setboard ", end="")
+#print( FEN_str )
 
 cmd = ['./ponder']
+cmd.append( 'AI' )
 cmd.append( FEN_str )
-os.chdir("checkers")
-print( subprocess.check_output(cmd) )
+#os.chdir("checkers")
+print( subprocess.check_output(cmd).decode("utf-8") )
 
 
+#cmd = ['./ponder']
+#cmd.append( 'MOVE' )
+#cmd.append( '10' )
+#print( subprocess.check_output(cmd).decode("utf-8") )

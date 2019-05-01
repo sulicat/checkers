@@ -27,6 +27,8 @@
 #include <iostream>
 #include "engine.hpp"
 #include "signal.hpp"
+#include "move.hpp"
+#include "zobrist.hpp"
 
 /** @mainpage Ponder, a English/American Checkers Game
  *
@@ -143,16 +145,19 @@ int main(int argc, char **argv){
 		checkers::signal(SIGSEGV, &checkers::crash_handler);
 		checkers::signal(SIGTRAP, &checkers::crash_handler);
 
+		if( argc != 3 ){std::cout << "wrong args\n"; return 0;}
 
-		if( argc != 2 ){std::cout << "wrong args\n"; return 0;}
-		std::string s( argv[1] );
-		std::cout << s << "\n";
+		std::string type(argv[1]);
+		std::string s( argv[2] );
 
-		std::string command = "setboard " + s;
-		std::cout << command << "\n";
-		checkers::engine::init().run_command(command);
-		checkers::engine::init().run_command("go");
+		if(type == "AI"){
+		  std::string command = "setboard " + s;
+		  checkers::engine::init().run_command(command);
+		  checkers::engine::init().run_command("go");
 
+		}else if( type == "MOVE" ){
+		  std::cout << "moving\n";
+		}
 
 
 	}

@@ -38,6 +38,8 @@ namespace checkers
     static engine& init(void);
     void run(void);
     void run_command( std::string command);
+    board _board;
+
 
   private:
     engine(void);
@@ -85,7 +87,6 @@ namespace checkers
     void do_white(const std::vector<std::string>& args);
     void not_implemented(const std::vector<std::string>& args);
 
-    board _board;
     bool _rotate;
     std::vector<move> _history;
     std::vector<move> _best_moves;
